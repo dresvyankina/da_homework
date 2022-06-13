@@ -49,9 +49,9 @@ with t1 as (
   select ship as name, ship as class from outcomes
   )
   select t1.name from t1
- join (select c.class, c.numguns from classes c, classes cl
+ cross join (select c.class, c.numguns from classes c, classes cl
  where c.displacement = cl.displacement) c1
- on t1.class = c1.class
+ where t1.class = c1.class
 and numguns >= all(select numguns from classes  where class in (SELECT t1.class 
                                             FROM t1)  );                                    
                                           
